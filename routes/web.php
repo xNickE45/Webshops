@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers;
+use App\Http\Controllers\ConsoleController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +18,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('consoles', ProductController::class);
+Route::get('/admin', [ProductController::class, 'index'])->name('admin.index')->middleware('auth');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+
+Route::get('/', [ConsoleController::class, 'index'])->name('home');
+
+

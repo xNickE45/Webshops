@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('game_console_id')->unsigned();
-            $table->foreignId('game_console_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('console_id');
+            $table->foreign('console_id')->references('id')->on('consoles');
             $table->integer('amount');
             $table->date('bought_date');
             $table->date('delivered_date');
