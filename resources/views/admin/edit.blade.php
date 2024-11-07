@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Console</h1>
-    <form action="{{ route('consoles.update', $console->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.update', $console->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">

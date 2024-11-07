@@ -36,16 +36,15 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'price' => 'required|numeric',
             'amount' => 'required|integer',
         ]);
-
-        $imagepath = $request->file('image_url')->store('images', 'public');
+        $imagePath = $request->file('image_url')->store('images', 'public');
 
         Console::create([
             'name' => $request->name,
-            'image_url' => $imagepath,
+            'image_url' => $imagePath,
             'price' => $request->price,
             'amount' => $request->amount,
         ]);
@@ -78,7 +77,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'price' => 'required|numeric',
             'amount' => 'required|integer',
         ]);

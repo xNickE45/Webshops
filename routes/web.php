@@ -24,13 +24,15 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 
-Route::resource('consoles', ProductController::class);
-Route::get('/admin', [ProductController::class, 'index'])->name('admin.index')->middleware('auth');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('/admin', [ProductController::class, 'index'])->name('admin.index')->middleware('auth');
+Route::get('/admin/create', [ProductController::class, 'create'])->name('admin.create')->middleware('auth');
+Route::post('/admin/store', [ProductController::class, 'store'])->name('admin.store')->middleware('auth');
+Route::get('/admin/show/{id}', [ProductController::class, 'show'])->name('admin.show')->middleware('auth');
+Route::get('/admin/edit/{id}', [ProductController::class, 'edit'])->name('admin.edit')->middleware('auth');
+Route::put('/admin/update/{id}', [ProductController::class, 'update'])->name('admin.update')->middleware('auth');
+Route::delete('/admin/delete/{id}', [ProductController::class, 'destroy'])->name('admin.destroy')->middleware('auth');
+
 
 Route::get('/', [ConsoleController::class, 'index'])->name('home');
 

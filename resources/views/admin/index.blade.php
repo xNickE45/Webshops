@@ -28,13 +28,13 @@
                     @foreach($consoles as $console)
                         <tr>
                             <td>{{ $console->id }}</td>
-                            <td><a href="{{ route('consoles.show', $console->id) }}">{{ $console->name }}</a></td>
+                            <td><a href="{{ route('admin.show', $console->id) }}">{{ $console->name }}</a></td>
                             <td><img src="{{ asset('storage/' . $console->image_url) }}" alt="{{ $console->name }}" style="width: 100px;"></td>
                             <td>{{ $console->price }}</td>
                             <td>{{ $console->amount }}</td>
                             <td>
-                                <a href="{{ route('consoles.edit', $console->id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('consoles.destroy', $console->id) }}" method="POST" style="display:inline-block;">
+                                <a href="{{ route('admin.edit', $console->id) }}" class="btn btn-warning">Edit</a>
+                                <form action="{{ route('admin.destroy', $console->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -44,7 +44,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="{{ route('consoles.create') }}" class="btn btn-primary">Create New Console</a>
+            <a href="{{ route('admin.create') }}" class="btn btn-primary">Create New Console</a>
             <a href="{{ route('home') }}" class="btn btn-primary">Back to the Homepage</a>
         </div>
         @endsection
