@@ -13,10 +13,11 @@
         </div>
         <div class="form-group">
             <label for="image_url">Image</label>
-            <input type="file" class="form-control" id="image_url" name="image_url">
+            <input type="file" class="form-control" id="image_url" name="image_url" onchange="previewImage(event)">
             @if($console->image_url)
-                <img src="{{ asset('storage/' . $console->image_url) }}" alt="Console Image" class="img-thumbnail mt-2" width="150">
+                <img id="existing_image" src="{{ asset('storage/' . $console->image_url) }}" alt="Console Image" class="img-thumbnail mt-2" width="150">
             @endif
+            <img id="image_preview" class="img-thumbnail mt-2" width="150" style="display: none;">
         </div>
         <div class="form-group">
             <label for="price">Price</label>
@@ -30,4 +31,17 @@
     </form>
     <a href="{{ route('admin.index') }}" class="btn btn-primary mt-3">Back to Dashboard</a>
 </div>
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const reader = new FileReader();
+        reader.onload = function() {
+            const img = document.getElementById('image_preview');
+            img.src = reader.result;
+            img.style.display = 'block';
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
 @endsection
